@@ -59,4 +59,16 @@ public class ActivityController {
         List<Activity> activities = activityService.findByTimeRange(startTime, endTime);
         return Response.success(activities);
     }
+
+    @GetMapping("/search")
+    public Response<List<Activity>> findByActivityName(@RequestParam String activityName) {
+        List<Activity> activities = activityService.findByActivityName(activityName);
+        return Response.success(activities);
+    }
+
+    @GetMapping("/creator")
+    public Response<List<Activity>> findByCreator(@RequestParam String username) {
+        List<Activity> activities = activityService.findByCreator(username);
+        return Response.success(activities);
+    }
 }

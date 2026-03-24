@@ -56,4 +56,14 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> findByTimeRange(LocalDateTime startTime, LocalDateTime endTime) {
         return activityMapper.findByTimeRange(startTime, endTime);
     }
+
+    @Override
+    public List<Activity> findByActivityName(String activityName) {
+        return activityMapper.findByActivityName(activityName);
+    }
+
+    @Override
+    public List<Activity> findByCreator(String username) {
+        return activityMapper.findByCreator(username);
+    }
 }

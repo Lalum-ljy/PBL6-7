@@ -29,4 +29,10 @@ public interface ActivityMapper {
 
     @Select("SELECT * FROM sys_activity WHERE start_time >= #{startTime} AND end_time <= #{endTime}")
     List<Activity> findByTimeRange(LocalDateTime startTime, LocalDateTime endTime);
+
+    @Select("SELECT * FROM sys_activity WHERE activity_name LIKE CONCAT('%', #{activityName}, '%')")
+    List<Activity> findByActivityName(String activityName);
+
+    @Select("SELECT a.* FROM sys_activity a JOIN sys_user u ON a.creator = u.username WHERE u.username LIKE CONCAT('%', #{username}, '%')")
+    List<Activity> findByCreator(String username);
 }

@@ -13,4 +13,6 @@ public interface ActivityService {
     void delete(Long id);
     List<Activity> findByStatus(Integer status);
     List<Activity> findByTimeRange(LocalDateTime startTime, LocalDateTime endTime);
+    List<Activity> findByActivityName(String activityName);
+    List<Activity> findByCreator(String username);
 }

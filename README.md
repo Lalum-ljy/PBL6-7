@@ -11,14 +11,14 @@
 - SQL中两表
   - sys_user
   - sys_activity 
-- 6个接口对应6个业务逻辑完成(3.24更正：应该是8个接口)
+- 8个接口
   - sys_user
     - 登录接口
     - 注册接口（设计哈希加密工具类）
   - sys_activity
      - CRUD四个
      - 按时间筛选
-     - 按内容筛选
+     - 按状态（0：未开始 1：进行中 2：已结束 3：已取消）筛选
 
 **须知**
  - 接口使用swagger统一管理，访问http://localhost:8080/swagger-ui/index.html 查看接口api

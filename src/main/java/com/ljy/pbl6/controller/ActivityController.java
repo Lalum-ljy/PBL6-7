@@ -25,8 +25,8 @@ public class ActivityController {
     }
 
     @GetMapping
-    public Response<List<Activity>> findAll() {
-        List<Activity> activities = activityService.findAll();
+    public Response<List<Activity>> findAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "15") int size) {
+        List<Activity> activities = activityService.findAll(page, size);
         return Response.success(activities);
     }
 
@@ -61,14 +61,26 @@ public class ActivityController {
     }
 
     @GetMapping("/search")
-    public Response<List<Activity>> findByActivityName(@RequestParam String activityName) {
-        List<Activity> activities = activityService.findByActivityName(activityName);
+    public Response<List<Activity>> findByKeyword(@RequestParam String keyword) {
+        List<Activity> activities = activityService.findByKeyword(keyword);
+        return Response.success(activities);
+    }
+
+    @GetMapping("/search/desc")
+    public Response<List<Activity>> findByActivityDesc(@RequestParam String activityDesc) {
+        List<Activity> activities = activityService.findByActivityDesc(activityDesc);
         return Response.success(activities);
     }
 
     @GetMapping("/creator")
     public Response<List<Activity>> findByCreator(@RequestParam String username) {
         List<Activity> activities = activityService.findByCreator(username);
+        return Response.success(activities);
+    }
+
+    @GetMapping("/hot")
+    public Response<List<Activity>> findHotActivities() {
+        List<Activity> activities = activityService.findByHotStatus(1);
         return Response.success(activities);
     }
 }

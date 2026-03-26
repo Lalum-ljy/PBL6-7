@@ -11,6 +11,9 @@ public class ActivityStatusMessage implements Serializable {
     private Integer newStatus;
     private LocalDateTime triggerTime;
 
+    public ActivityStatusMessage() {
+    }
+
     public ActivityStatusMessage(Long activityId, Integer newStatus, LocalDateTime triggerTime) {
         this.activityId = activityId;
         this.newStatus = newStatus;

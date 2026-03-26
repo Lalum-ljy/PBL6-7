@@ -28,6 +28,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public List<Activity> findAll(int page, int size) {
+        return activityMapper.findAllByPage((page - 1) * size, size);
+    }
+
+    @Override
     public Activity create(Activity activity) {
         activity.setCreateTime(LocalDateTime.now());
         activity.setUpdateTime(LocalDateTime.now());
@@ -58,12 +63,22 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> findByActivityName(String activityName) {
-        return activityMapper.findByActivityName(activityName);
+    public List<Activity> findByKeyword(String keyword) {
+        return activityMapper.findByKeyword(keyword);
+    }
+
+    @Override
+    public List<Activity> findByActivityDesc(String activityDesc) {
+        return activityMapper.findByActivityDesc(activityDesc);
     }
 
     @Override
     public List<Activity> findByCreator(String username) {
         return activityMapper.findByCreator(username);
+    }
+
+    @Override
+    public List<Activity> findByHotStatus(Integer hotStatus) {
+        return activityMapper.findByHotStatus(hotStatus);
     }
 }

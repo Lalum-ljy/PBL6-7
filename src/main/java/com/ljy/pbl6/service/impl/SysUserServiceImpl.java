@@ -39,19 +39,19 @@ public class SysUserServiceImpl implements SysUserService {
 
         // 创建新用户
         SysUser user = new SysUser();
-        user.setUserType(registerDto.getUserType());
+        user.setUserType(0); // 默认用户类型
         user.setUsername(registerDto.getUsername());
         // 密码哈希加密
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-        user.setRealName(registerDto.getRealName());
-        user.setGender(registerDto.getGender());
-        user.setPhone(registerDto.getPhone());
-        user.setEmail(registerDto.getEmail());
-        user.setSchoolId(registerDto.getSchoolId());
-        user.setCollege(registerDto.getCollege());
-        user.setMajor(registerDto.getMajor());
-        user.setGrade(registerDto.getGrade());
-        user.setClassName(registerDto.getClassName());
+        user.setRealName("" + registerDto.getUsername()); // 使用用户名作为默认真实姓名
+        user.setGender(0); // 默认性别
+        user.setPhone(""); // 默认空
+        user.setEmail("" + registerDto.getUsername() + "@example.com"); // 默认邮箱
+        user.setSchoolId(0L); // 默认学校ID
+        user.setCollege(""); // 默认空
+        user.setMajor(""); // 默认空
+        user.setGrade(""); // 默认空
+        user.setClassName(""); // 默认空
         user.setStatus(1); // 默认为正常状态
         user.setIsDeleted(0); // 默认为未删除
         user.setCreateTime(LocalDateTime.now());

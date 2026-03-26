@@ -1,12 +1,54 @@
+# 这是第三次提交 3.26
+## 项目选题是校园活动发布平台
+### 关于本次提交
+- **增加了前端部分（vue）**
+  - 考虑到项目解耦性，前端仓库与本仓库分开，前端具体可访问https://github.com/Lalum-ljy/PBL6-vue
+- 后端更新了2个接口
+  - 根据标题和内容搜索（替换了原本的根据内容搜索）
+  - 根据是否为热门活动筛选
+- 修改了sys_activity表的结构
+  - 增加了hot_status字段
+  - 让该表的主键（id）可以复用
+  - 修改后的数据库查询语句
+```sql
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sys_activity
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_activity`;
+CREATE TABLE `sys_activity`  (
+  `id` bigint UNSIGNED NOT NULL COMMENT '活动ID（主键）',
+  `activity_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '活动名称',
+  `activity_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '活动描述',
+  `cover_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '活动封面图片URL地址',
+  `start_time` datetime NOT NULL COMMENT '活动开始时间',
+  `end_time` datetime NOT NULL COMMENT '活动结束时间',
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '活动状态：0-未开始 1-进行中 2-已结束 3-已取消',
+  `creator` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '创建人',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `hot_status` tinyint NOT NULL DEFAULT 0 COMMENT '活动热门状态：0-非热门 1-热门',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_activity_time`(`start_time` ASC, `end_time` ASC) USING BTREE,
+  INDEX `idx_activity_status`(`status` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '活动表' ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+ ````
+ - 彻底跑通了消息队列，现在消息队列经过测试，完全可用
+
+
 # 这是第二次提交 3.24
 ## 项目选题是校园活动发布平台
 ### 关于本次提交
 **本次提交包括：**
 - 增加了3个接口
- - 根据标题搜索
- - 根据内容搜索
- - 根据发起人搜索（两表联合）
- - 以上接口均支持模糊搜索，均通过本地测试
+  - 根据标题搜索
+  - 根据内容搜索
+  - 根据发起人搜索（两表联合）
+  - 以上接口均支持模糊搜索，均通过本地测试
 
 
 

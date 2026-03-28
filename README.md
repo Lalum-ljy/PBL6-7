@@ -1,3 +1,34 @@
+# 这是第四次提交 3.28
+## 项目前端请可访问https://github.com/Lalum-ljy/PBL6-vue （有更新：第二次提交 3.38）
+### 关于本次提交
+- 新增sys_notice表
+  - 该表的5个接口
+   - 增
+   - 删（按id）
+   - 改
+   - 查（按id）
+   - 获取所有公告
+- 该表表结构
+```sql
+CREATE TABLE `sys_notice`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID，自增',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '通知内容',
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '通知标题',
+  `readerstatus` tinyint NOT NULL DEFAULT 0 COMMENT '通知接收范围：0-所有人 1-普通用户 2-医生',
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '通知状态：0-未读 1-已读 2-已删除',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '通知创建时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_sys_notice_readerstatus`(`readerstatus` ASC) USING BTREE,
+  INDEX `idx_sys_notice_reader_status`(`readerstatus` ASC, `status` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统通知表' ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
+ ````
+
+
+
+
+
 # 这是第三次提交 3.26
 ## 项目选题是校园活动发布平台
 ### 关于本次提交
@@ -76,7 +107,7 @@ SET FOREIGN_KEY_CHECKS = 1;
      - 按状态（0：未开始 1：进行中 2：已结束 3：已取消）筛选
 
 **须知**
- - 接口使用swagger统一管理，访问http://localhost:8080/swagger-ui/index.html 查看接口api
+ - 接口使用swagger统一管理，访问http://localhost:8080/swagger-ui/index.html （本机）查看接口api
  - Redis当前未正式调用，本应存入的token暂时使用try catch包裹
  - rabbitMQ用在活动表的状态切换，自动开始/结束任务，**未经测试**
  - **前端建议使用axios统一管理接口**

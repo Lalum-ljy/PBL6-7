@@ -1,6 +1,7 @@
 package com.ljy.pbl6.controller;
 
 import com.ljy.pbl6.common.Response;
+import com.ljy.pbl6.dto.PageResponse;
 import com.ljy.pbl6.entity.Activity;
 import com.ljy.pbl6.service.ActivityService;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,19 @@ public class ActivityController {
     }
 
     @GetMapping
-    public Response<List<Activity>> findAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "15") int size) {
+    public Response<PageResponse<Activity>> findAll(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "15") int size) {
         List<Activity> activities = activityService.findAll(page, size);
-        return Response.success(activities);
+        long totalItems = activityService.getTotalCount();
+        int totalPages = (int) Math.ceil((double) totalItems / size);
+        
+        PageResponse<Activity> pageResponse = new PageResponse<>();
+        pageResponse.setData(activities);
+        pageResponse.setTotalPages(totalPages);
+        pageResponse.setTotalItems(totalItems);
+        pageResponse.setCurrentPage(page);
+        pageResponse.setPageSize(size);
+        
+        return Response.success(pageResponse);
     }
 
     @PostMapping

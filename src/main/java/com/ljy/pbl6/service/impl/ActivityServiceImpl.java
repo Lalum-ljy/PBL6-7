@@ -81,4 +81,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> findByHotStatus(Integer hotStatus) {
         return activityMapper.findByHotStatus(hotStatus);
     }
+
+    @Override
+    public long getTotalCount() {
+        return activityMapper.getTotalCount();
+    }
 }

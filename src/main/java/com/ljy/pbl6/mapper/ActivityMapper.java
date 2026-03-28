@@ -44,4 +44,7 @@ public interface ActivityMapper {
 
     @Select("SELECT * FROM sys_activity WHERE hot_status = #{hotStatus} AND status IN (0, 1)")
     List<Activity> findByHotStatus(Integer hotStatus);
+
+    @Select("SELECT COUNT(*) FROM sys_activity")
+    long getTotalCount();
 }

@@ -18,4 +18,5 @@ public interface ActivityService {
     List<Activity> findByActivityDesc(String activityDesc);
     List<Activity> findByCreator(String username);
     List<Activity> findByHotStatus(Integer hotStatus);
+    long getTotalCount();
 }

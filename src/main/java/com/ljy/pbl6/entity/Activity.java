@@ -12,8 +12,8 @@ public class Activity {
     private String coverUrl;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Integer status;
-    private Integer hotStatus;
+    private Integer status = 0;
+    private Integer hotStatus = 0;
     private String creator;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

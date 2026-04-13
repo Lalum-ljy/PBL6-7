@@ -5,7 +5,9 @@
   - 现在新增活动会调用POST/api/activity和POST/api/updown/img两个接口实现创建活动时的图片上传
   - 图片上传路径是src/mian/resources/static/img
   - (这个功能竟然写了一天才完全写好)
--**新增mcp板块（重大更新）**
+
+
+**新增mcp板块（重大更新）**
  - 引入mcp大模型功能实现了指令化了增加活动和查询活动操作
  - 正常对话和具体操作时两个业务逻辑板块（ModelEngineService和SmartAssistantService）
  - 两个业务逻辑使用同一个接口POST/api/chat

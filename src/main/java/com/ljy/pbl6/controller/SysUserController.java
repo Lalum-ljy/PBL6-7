@@ -6,7 +6,7 @@ import com.ljy.pbl6.dto.LoginResponseDto;
 import com.ljy.pbl6.dto.RegisterDto;
 import com.ljy.pbl6.entity.SysUser;
 import com.ljy.pbl6.service.SysUserService;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

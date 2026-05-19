@@ -1,5 +1,6 @@
 package com.ljy.pbl6.service.impl;
 
+import com.ljy.pbl6.controller.VerifyCodeController;
 import com.ljy.pbl6.dto.LoginDto;
 import com.ljy.pbl6.dto.LoginResponseDto;
 import com.ljy.pbl6.dto.RegisterDto;
@@ -68,6 +69,13 @@ public class SysUserServiceImpl implements SysUserService {
         SysUser user = sysUserMapper.findByUsername(loginDto.getUsername());
         if (user == null) {
             throw new RuntimeException("用户名或密码错误");
+        }
+
+        // 如果提供了验证码，验证验证码
+        if (loginDto.getVerifyCode() != null && !loginDto.getVerifyCode().isEmpty()) {
+            if (!VerifyCodeController.validateAndRemoveCode(loginDto.getVerifyCode())) {
+                throw new RuntimeException("验证码错误");
+            }
         }
 
         // 验证密码

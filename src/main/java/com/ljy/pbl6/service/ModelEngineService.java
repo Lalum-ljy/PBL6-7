@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,14 @@ public class ModelEngineService {
         // 构建请求体
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("model", modelEngineConfig.getModelName());
-        requestBody.put("messages", List.of(
-                Map.of("role", "user", "content", prompt)
-        ));
+        
+        List<Map<String, Object>> messages = new ArrayList<>();
+        Map<String, Object> userMessage = new HashMap<>();
+        userMessage.put("role", "user");
+        userMessage.put("content", prompt);
+        messages.add(userMessage);
+        
+        requestBody.put("messages", messages);
         requestBody.put("temperature", 0.7);
 
         // 发送请求
